@@ -53,7 +53,7 @@ void setup() {
 for(int i=0;i<numSoil;i++){
     soil[i]=loadImage("img/soil"+i+".png");};
 
-  groundhogIdleSpeed = 80/16;
+  groundhogIdleSpeed = 80;
 
 }
   
@@ -196,68 +196,26 @@ for(int k=-8;k<8;k+=3){
 
 		// Player
  // Player
-    if(move){
-      image(groundhogIdle,groundhogIdleX,groundhogIdleY);
-    }
-    
-    if(downPressed){
-      move = false;
-      leftPressed = false;
-      rightPressed = false;
-      image(groundhogDown,groundhogIdleX,groundhogIdleY);
-      if(groundhogIdleY < startPoint+1520){
-       startPoint -= groundhogIdleSpeed;
-        if(startPoint%80 == 0){
-        downPressed = false;
-        move = true;
-        }
-      }
-      else{
-        groundhogIdleY += groundhogIdleSpeed;
-      
-      } 
-    }
-    
-    if(leftPressed){
-     move = false;
-      downPressed = false;
-      rightPressed = false;
-      image(groundhogLeft,groundhogIdleX,groundhogIdleY);
-      groundhogIdleX -= groundhogIdleSpeed;
-      if(groundhogIdleX%80 == 0){
-        leftPressed = false;
-        move = true;
-      }
-    }
-    
-    if(rightPressed){
-      move= false;
-      leftPressed = false;
-      downPressed = false;
-      image(groundhogRight,groundhogIdleX,groundhogIdleY);
-      groundhogIdleX += groundhogIdleSpeed;
-      if(groundhogIdleX%80 == 0){
-        rightPressed = false;
-        move = true;
-      }
-    }
-    
-    // Player boundary detection
-    if(groundhogIdleX<0){
-      leftPressed = false;
-      move= true;
-      groundhogIdleX = 0;
-    }
-    if(groundhogIdleX>width-80){
-      rightPressed = false;
-      move = true;
-      groundhogIdleX = width-80;
-    }
-    if(groundhogIdleY>height-80){
-      downPressed = false;
-      move= true;
-      groundhogIdleY = height-80;
-    }
+    image(groundhogIdle,groundhogIdleX,groundhogIdleY);
+if(downPressed){
+groundhogIdleY += groundhogIdleSpeed;
+downPressed=false;
+if(groundhogIdleY + groundhogIdleHeight> height) 
+{groundhogIdleY = height - groundhogIdleHeight;}
+}
+if(leftPressed){
+groundhogIdleX -= groundhogIdleSpeed;
+if(groundhogIdleX< 0){ groundhogIdleX= 0;}
+leftPressed=false;
+}
+if(rightPressed){
+groundhogIdleX+= groundhogIdleSpeed;
+if(groundhogIdleX + groundhogIdleWidth > width)
+{
+groundhogIdleX = width -groundhogIdleWidth;}
+rightPressed=false;
+
+}
 
 		// Health UI
 
